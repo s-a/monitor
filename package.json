@@ -9,13 +9,16 @@
   "scripts": {
     "build": "cd frontend/monitor && node node_modules/react-scripts/bin/react-scripts.js build"
   },
-  "apps": [{
-    "script": "index.js",
-    "merge_logs": true,
-    "max_memory_restart": "200M"
-  }],
+  "apps": [
+    {
+      "script": "index.js",
+      "merge_logs": true,
+      "max_memory_restart": "200M"
+    }
+  ],
   "dependencies": {
     "@pm2/io": "^2.4.5",
+    "@slack/client": "^4.8.0",
     "find-root": "^1.1.0",
     "http-proxy": "^1.17.0",
     "moment": "^2.22.2",
