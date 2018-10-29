@@ -19,12 +19,16 @@
   "dependencies": {
     "@pm2/io": "^2.4.5",
     "@slack/client": "^4.8.0",
+    "diskusage": "^0.2.5",
+    "elasticsearch": "^15.1.1",
     "find-root": "^1.1.0",
     "http-proxy": "^1.17.0",
     "moment": "^2.22.2",
+    "mongodb": "^3.1.8",
     "pm2": "^3.2.2",
     "pm2-events": "^0.1.1",
     "restify": "^7.2.1",
+    "systeminformation": "^3.45.9",
     "websocket": "^1.0.28"
   }
 }

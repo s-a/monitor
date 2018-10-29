@@ -67,7 +67,6 @@ class App extends Component {
     client.onmessage = function (e) {
       if (typeof e.data === 'string') {
         const log = JSON.parse(e.data)
-        console.log(log);
         if (log.hostname) {
           const slots = self.state.slots
           log.details.hostname = log.hostname
