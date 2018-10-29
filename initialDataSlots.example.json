@@ -1,0 +1,7 @@
+[{
+  "computername": "DESKTOP-GNESREK",
+  "names": ["test-error", "gugu"]
+}, {
+  "computername": "evil-computer",
+  "names": ["mongo-db", "elastic-search-server"]
+}]
