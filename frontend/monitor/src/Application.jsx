@@ -49,7 +49,7 @@ class App extends Component {
     const self = this
     var W3CWebSocket = window.WebSocket;
     var protocoll = window.location.protocol === 'http:' ? 'ws' : 'wss'
-    var port = window.location.protocol === 'http:' ? ':5040' : ''
+    var port = window.location.protocol === 'http:' ? ':5040' : '/ws'
     var client = new W3CWebSocket(`${protocoll}://${window.location.hostname}${port}`, 'echo-protocol')
 
     client.onerror = function () {
