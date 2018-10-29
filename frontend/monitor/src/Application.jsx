@@ -48,7 +48,7 @@ class App extends Component {
   componentDidMount() {
     const self = this
     var W3CWebSocket = window.WebSocket;
-    var client = new W3CWebSocket(`ws://${window.location.hostname}:5040`, 'echo-protocol');
+    var client = new W3CWebSocket(`${window.location.protocol === 'http:' ? 'ws' : 'wss'}://${window.location.hostname}:5040`, 'echo-protocol');
 
     client.onerror = function () {
       console.log('Connection Error');
