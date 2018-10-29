@@ -48,7 +48,9 @@ class App extends Component {
   componentDidMount() {
     const self = this
     var W3CWebSocket = window.WebSocket;
-    var client = new W3CWebSocket(`${window.location.protocol === 'http:' ? 'ws' : 'wss'}://${window.location.hostname}:5040`, 'echo-protocol');
+    var protocoll = window.location.protocol === 'http:' ? 'ws' : 'wss'
+    var port = window.location.protocol === 'http:' ? ':5040' : ''
+    var client = new W3CWebSocket(`${protocoll}://${window.location.hostname}${port}`, 'echo-protocol')
 
     client.onerror = function () {
       console.log('Connection Error');
@@ -133,7 +135,7 @@ class App extends Component {
               <ul className="list-group" data-toggle="toggle">
                 <li className="list-group-item">
                   <h2>
-                    <i class="fas fa-server"></i> {slot.details.computername}
+                    <i className="fas fa-server"></i> {slot.details.computername}
                   </h2>
                 </li>
               </ul>
@@ -166,7 +168,7 @@ class App extends Component {
                 </ul>
               </div>
               <div className="list-group-item">
-                <i class="fas fa-terminal"></i> {slot.details.computername}/{(slot.details.sender || '?')}
+                <i className="fas fa-terminal"></i> {slot.details.computername}/{(slot.details.sender || '?')}
               </div>
             </ul>
           </div>
