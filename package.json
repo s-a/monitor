@@ -1,0 +1,27 @@
+{
+  "name": "pm2-networks-monitor",
+  "version": "1.0.0",
+  "description": "pm2-networks-monitor",
+  "config": {
+    "days_interval": 7,
+    "max_size": 5242880
+  },
+  "scripts": {
+    "build": "cd frontend/monitor && node node_modules/react-scripts/bin/react-scripts.js build"
+  },
+  "apps": [{
+    "script": "index.js",
+    "merge_logs": true,
+    "max_memory_restart": "200M"
+  }],
+  "dependencies": {
+    "@pm2/io": "^2.4.5",
+    "find-root": "^1.1.0",
+    "http-proxy": "^1.17.0",
+    "moment": "^2.22.2",
+    "pm2": "^3.2.2",
+    "pm2-events": "^0.1.1",
+    "restify": "^7.2.1",
+    "websocket": "^1.0.28"
+  }
+}
