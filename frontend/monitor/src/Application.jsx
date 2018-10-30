@@ -122,23 +122,20 @@ class App extends Component {
     return result
   }
 
-  fetchSlots(computername) {
+  fetchSlots(hostname) {
     const result = []
-    const computers = this.computers || []
     for (let i = 0; i < this.state.slots.length; i++) {
       const slot = this.state.slots[i];
-      if (computers.indexOf(slot.details.computername) === -1) {
-        if (slot.details.hostname && slot.details.computername && slot.details.name) {
-          result.push(slot)
-        }
+      if (slot.hostname === hostname) {
+        result.push(slot)
       }
     }
     return result
   }
 
-  hasError(computername) {
+  hasError(hostname) {
     let result = false
-    const slots = this.fetchSlots(computername)
+    const slots = this.fetchSlots(hostname)
     for (let i = 0; i < slots.length; i++) {
       const slot = slots[i];
       if (slot.details.valid_state !== 'success') {
@@ -163,7 +160,7 @@ class App extends Component {
             <div key={uniqueKey} className="col-sm">
               <ul className="" data-toggle="toggle">
                 <li className="">
-                  <strong className={this.hasError(slot.details.computername) ? 'text-danger' : ''}>
+                  <strong className={this.hasError(slot.hostname) ? 'text-danger' : ''}>
                     <i className="fas fa-server"></i> {slot.details.computername}
                   </strong>
                 </li>
