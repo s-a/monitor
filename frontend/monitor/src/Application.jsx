@@ -158,7 +158,7 @@ class App extends Component {
         result.push(
           <div key={uniqueKey} className="col-sm">
             <ul className="">
-              <button href={"#" + uniqueKey} className={"btn btn-small btn-" + slot.details.valid_state} data-toggle={"collapse"}>
+              <button href={"#" + uniqueKey} className={"btn btn-sm btn-" + slot.details.valid_state} data-toggle={"collapse"}>
                 {slot.details.name}
               </button>
               <div id={uniqueKey} className="collapse">
@@ -167,7 +167,10 @@ class App extends Component {
                 </ul>
               </div>
               <div className="">
-                <i className="fas fa-terminal"></i> {slot.details.computername}/{(slot.details.sender || '?')}
+                <i className="fas fa-terminal"></i>
+                <small>
+                  {(slot.details.sender || '?')} v{slot.version}
+                </small>
               </div>
             </ul>
           </div>
