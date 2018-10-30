@@ -105,7 +105,7 @@ class App extends Component {
           )
         }
         let slotItemDetail = (
-          <li className="list-group-item" key={uniqueKey}>
+          <li className="" key={uniqueKey}>
             {keyControl}{valueControl}
           </li>
         )
@@ -131,11 +131,11 @@ class App extends Component {
           const uniqueKey = slot.details.hostname + '_' + slot.details.computername + '_' + slot.details.name + i
           result.push(
             <div key={uniqueKey} className="col-sm">
-              <ul className="list-group" data-toggle="toggle">
-                <li className="list-group-item">
-                  <h2>
+              <ul className="" data-toggle="toggle">
+                <li className="">
+                  <strong>
                     <i className="fas fa-server"></i> {slot.details.computername}
-                  </h2>
+                  </strong>
                 </li>
               </ul>
               {this.renderSlots(slot.details.computername)}
@@ -157,16 +157,16 @@ class App extends Component {
         const uniqueKey = slot.details.hostname + '_' + slot.details.computername + '_' + slot.details.name + i
         result.push(
           <div key={uniqueKey} className="col-sm">
-            <ul className="list-group">
-              <button href={"#" + uniqueKey} className={"btn btn-primary btn-" + slot.details.valid_state} data-toggle={"collapse"}>
+            <ul className="">
+              <button href={"#" + uniqueKey} className={"btn btn-small btn-" + slot.details.valid_state} data-toggle={"collapse"}>
                 {slot.details.name}
               </button>
               <div id={uniqueKey} className="collapse">
-                <ul className="list-group-item">
+                <ul className="">
                   {this.renderSlotDetails(slot)}
                 </ul>
               </div>
-              <div className="list-group-item">
+              <div className="">
                 <i className="fas fa-terminal"></i> {slot.details.computername}/{(slot.details.sender || '?')}
               </div>
             </ul>
