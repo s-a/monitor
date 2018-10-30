@@ -143,7 +143,8 @@ class App extends Component {
       const slot = slots[i];
       if (slot.details.valid_state !== 'success') {
         result = true
-        document.getElementById('alarm-sound').play();
+        // document.getElementById('alarm-sound').play();
+        // document.getElementById('alarm-sound').pause();
         break
       }
     }
