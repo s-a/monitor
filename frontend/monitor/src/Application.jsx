@@ -34,6 +34,7 @@ class App extends Component {
       const slot = slots[i]
       if (slot && slot.details.hostname === slotData.details.hostname && slot.details.computername === slotData.details.computername && slot.details.name === slotData.details.name) {
         upd(slot.details, slotData.details)
+        slot.version = slotData.version
         slots[i] = slot
         found = true
         break
