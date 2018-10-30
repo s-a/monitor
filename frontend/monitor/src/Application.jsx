@@ -179,9 +179,9 @@ class App extends Component {
         result.push(
           <div key={uniqueKey} className="col-sm">
             <ul className="">
-              <button href={"#" + uniqueKey} className={"btn btn-sm btn-" + slot.details.valid_state} data-toggle={"collapse"}>
+              <a href={"#" + uniqueKey} className={"btn btn-sm btn-" + slot.details.valid_state} data-toggle={"collapse"}>
                 {slot.details.name}
-              </button>
+              </a>
               <div id={uniqueKey} className="collapse">
                 <ul className="">
                   {this.renderSlotDetails(slot)}
