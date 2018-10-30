@@ -151,7 +151,7 @@ class App extends Component {
         if (slot.details.hostname && slot.details.computername && slot.details.name) {
           const uniqueKey = slot.details.hostname + '_' + slot.details.computername + '_' + slot.details.name + i
           result.push(
-            <div key={uniqueKey} className="col-sm">
+            <div key={uniqueKey} className="col-sm computer">
               <a className="" data-toggle="collapse" href={'#' + uniqueKey + "_collapseExample"} role="button" aria-expanded="false" aria-controls="collapseExample">
                 <strong className={this.hasError(slot.hostname) ? 'text-danger' : ''}>
                   <i className="fas fa-server"></i> {slot.details.computername}
@@ -160,7 +160,6 @@ class App extends Component {
               <div className="collapse" id={uniqueKey + "_collapseExample"}>
                 <ul>
                   <li className="">
-
                     {this.renderSlots(slot.details.computername)}
                   </li>
                 </ul>
@@ -184,12 +183,12 @@ class App extends Component {
         result.push(
           <div key={uniqueKey} className="col-sm">
 
-            <ul className="">
+            <ul className="slot">
               <a href={"#" + uniqueKey} className={"text-" + slot.details.valid_state} data-toggle={"collapse"}>
-                {slot.details.name}
+                <i class="fas fa-rocket"></i> {slot.details.name}
               </a>
               <div id={uniqueKey} className="collapse">
-                <ul className="">
+                <ul className="slot-details">
                   {this.renderSlotDetails(slot)}
                 </ul>
               </div>
