@@ -153,7 +153,7 @@ class App extends Component {
           result.push(
             <div key={uniqueKey} className="col-sm computer">
               <a className="" data-toggle="collapse" href={'#' + uniqueKey + "_collapseExample"} role="button" aria-expanded="false" aria-controls="collapseExample">
-                <strong className={this.hasError(slot.hostname) ? 'text-danger' : ''}>
+                <strong className={this.hasError(slot.hostname) ? 'text-danger' : 'text-success'}>
                   <i className="fas fa-server"></i> {slot.details.computername}
                 </strong>
               </a>
