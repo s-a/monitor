@@ -12,8 +12,8 @@ ul {
 
 .text-danger {
   text-shadow: 0 0 5px #FF0000;
-  transition: all 0.2s ease-out;
-  animation: ALARM 1s infinite;
+  transition: all 0.1s ease-out;
+  animation: ALARM 2s infinite;
 }
 
 .text-danger::after {
@@ -22,15 +22,14 @@ ul {
 
 @keyframes ALARM {
   0% {
-    opacity: 0;
+    text-decoration: overline;
   }
 
   50% {
-    opacity: 1;
+    text-decoration: underline;
   }
 
-
   100% {
-    opacity: 0;
+    text-decoration: none;
   }
 }

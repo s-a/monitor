@@ -83,7 +83,7 @@ class App extends Component {
   renderSlotDetails(slot) {
     const result = []
     let lastKey = ''
-    const ignoreList = ['hostname', 'name', 'computername', 'sender']
+    const ignoreList = ['hostname', 'name', 'computername', 'sender', 'valid_state']
     for (const key in slot.details) {
       const uniqueKey = slot.details.hostname + '-' + slot.details.computername + '-' + slot.details.name + '-' + key
       if (ignoreList.indexOf(key) === -1 && slot.details.hasOwnProperty(key)) {
@@ -94,7 +94,7 @@ class App extends Component {
           keyControl = null
           valueControl = (
             <pre>
-              <button href={"#" + uniqueKey} className="btn btn-sm" data-toggle={"collapse"}>{capitalize(key)}</button>
+              <a href={"#" + uniqueKey} className="" data-toggle={"collapse"}>{capitalize(key)}</a>
               <code id={uniqueKey} className={"collapse"}>{data ? JSON.stringify(data, '/t', 2) : null}</code>
             </pre>
           )
@@ -152,14 +152,19 @@ class App extends Component {
           const uniqueKey = slot.details.hostname + '_' + slot.details.computername + '_' + slot.details.name + i
           result.push(
             <div key={uniqueKey} className="col-sm">
-              <ul className="" data-toggle="toggle">
-                <li className="">
-                  <strong className={this.hasError(slot.hostname) ? 'text-danger' : ''}>
-                    <i className="fas fa-server"></i> {slot.details.computername}
-                  </strong>
-                </li>
-              </ul>
-              {this.renderSlots(slot.details.computername)}
+              <a className="" data-toggle="collapse" href={'#' + uniqueKey + "_collapseExample"} role="button" aria-expanded="false" aria-controls="collapseExample">
+                <strong className={this.hasError(slot.hostname) ? 'text-danger' : ''}>
+                  <i className="fas fa-server"></i> {slot.details.computername}
+                </strong>
+              </a>
+              <div className="collapse" id={uniqueKey + "_collapseExample"}>
+                <ul>
+                  <li className="">
+
+                    {this.renderSlots(slot.details.computername)}
+                  </li>
+                </ul>
+              </div>
             </div>
           )
           computers.push(slot.details.computername)
@@ -178,8 +183,9 @@ class App extends Component {
         const uniqueKey = slot.details.hostname + '_' + slot.details.computername + '_' + slot.details.name + i
         result.push(
           <div key={uniqueKey} className="col-sm">
+
             <ul className="">
-              <a href={"#" + uniqueKey} className={"btn btn-sm btn-" + slot.details.valid_state} data-toggle={"collapse"}>
+              <a href={"#" + uniqueKey} className={"text-" + slot.details.valid_state} data-toggle={"collapse"}>
                 {slot.details.name}
               </a>
               <div id={uniqueKey} className="collapse">
