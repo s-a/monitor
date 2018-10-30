@@ -80,12 +80,6 @@ class App extends Component {
     };
   }
 
-  /* 
-  <button class="collapsible">Open Collapsible</button>
-<div class="content">
-  <p>Lorem ipsum...</p>
-</div>
- */
   renderSlotDetails(slot) {
     const result = []
     let lastKey = ''
@@ -100,7 +94,7 @@ class App extends Component {
           keyControl = null
           valueControl = (
             <pre>
-              <button href={"#" + uniqueKey} className="btn btn-error" data-toggle={"collapse"}>{capitalize(key)}</button>
+              <button href={"#" + uniqueKey} className="btn btn-sm" data-toggle={"collapse"}>{capitalize(key)}</button>
               <code id={uniqueKey} className={"collapse"}>{data ? JSON.stringify(data, '/t', 2) : null}</code>
             </pre>
           )
