@@ -184,7 +184,7 @@ class App extends Component {
           <div key={uniqueKey} className="col-sm">
 
             <ul className="slot">
-              <a href={"#" + uniqueKey} className={"text-" + slot.details.valid_state} data-toggle={"collapse"}>
+              <a href={"#" + uniqueKey} className={"text-" + (slot.details.valid_state || 'success')} data-toggle={"collapse"}>
                 <i class="fas fa-rocket"></i> {slot.details.name}
               </a>
               <div id={uniqueKey} className="collapse">
