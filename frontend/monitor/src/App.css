@@ -4,3 +4,8 @@ pre {
   background-color: rgb(24, 24, 24);
   color: white;
 }
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}

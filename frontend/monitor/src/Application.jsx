@@ -122,6 +122,34 @@ class App extends Component {
     return result
   }
 
+  fetchSlots(computername) {
+    const result = []
+    const computers = this.computers || []
+    for (let i = 0; i < this.state.slots.length; i++) {
+      const slot = this.state.slots[i];
+      if (computers.indexOf(slot.details.computername) === -1) {
+        if (slot.details.hostname && slot.details.computername && slot.details.name) {
+          result.push(slot)
+        }
+      }
+    }
+    return result
+  }
+
+  hasError(computername) {
+    let result = false
+    const slots = this.fetchSlots(computername)
+    for (let i = 0; i < slots.length; i++) {
+      const slot = slots[i];
+      if (slot.details.valid_state !== 'success') {
+        result = true
+        document.getElementById('alarm-sound').play();
+        break
+      }
+    }
+    return result
+  }
+
   renderComputers() {
     const result = []
     const computers = this.computers || []
@@ -134,7 +162,7 @@ class App extends Component {
             <div key={uniqueKey} className="col-sm">
               <ul className="" data-toggle="toggle">
                 <li className="">
-                  <strong>
+                  <strong className={this.hasError(slot.details.computername) ? 'text-danger' : ''}>
                     <i className="fas fa-server"></i> {slot.details.computername}
                   </strong>
                 </li>
