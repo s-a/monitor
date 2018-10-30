@@ -1,6 +1,6 @@
 {
   "name": "pm2-networks-monitor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "pm2-networks-monitor",
   "config": {
     "days_interval": 7,
@@ -9,13 +9,11 @@
   "scripts": {
     "build": "cd frontend/monitor && node node_modules/react-scripts/bin/react-scripts.js build"
   },
-  "apps": [
-    {
-      "script": "index.js",
-      "merge_logs": true,
-      "max_memory_restart": "200M"
-    }
-  ],
+  "apps": [{
+    "script": "index.js",
+    "merge_logs": true,
+    "max_memory_restart": "200M"
+  }],
   "dependencies": {
     "@pm2/io": "^2.4.5",
     "@slack/client": "^4.8.0",
