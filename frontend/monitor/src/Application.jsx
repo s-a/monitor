@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Device from './Device';
+
+
+
+
 function upd(a, b) {
   for (var i in b) {
     if (b.hasOwnProperty(i)) {
@@ -33,7 +37,13 @@ class App extends Component {
     for (let i = 0; i < slots.length; i++) {
       const slot = slots[i]
       if (slot && slot.details.hostname === slotData.details.hostname && slot.details.computername === slotData.details.computername && slot.details.name === slotData.details.name) {
-        upd(slot.details, slotData.details)
+        // upd(slot.details, slotData.details)
+        // slot.details = slotData.details || 
+        if (slotData.details.valid_state !== 'danger') {
+          upd(slot.details, slotData.details)
+        } else {
+          slot.details = slotData.details
+        }
         slot.version = slotData.version
         slots[i] = slot
         found = true
@@ -83,7 +93,7 @@ class App extends Component {
   renderSlotDetails(slot) {
     const result = []
     let lastKey = ''
-    const ignoreList = ['hostname', 'name', 'computername', 'sender', 'valid_state']
+    const ignoreList = ['hostname', 'name', 'computername', 'sender', 'valid_state', 'icon', 'status', 'text']
     for (const key in slot.details) {
       const uniqueKey = slot.details.hostname + '-' + slot.details.computername + '-' + slot.details.name + '-' + key
       if (ignoreList.indexOf(key) === -1 && slot.details.hasOwnProperty(key)) {
@@ -93,10 +103,10 @@ class App extends Component {
         if (typeof data === 'object') {
           keyControl = null
           valueControl = (
-            <pre>
+            <div>
               <a href={"#" + uniqueKey} className="" data-toggle={"collapse"}>{capitalize(key)}</a>
               <code id={uniqueKey} className={"collapse"}>{data ? JSON.stringify(data, '/t', 2) : null}</code>
-            </pre>
+            </div>
           )
         }
         let slotItemDetail = (
@@ -132,7 +142,7 @@ class App extends Component {
     const slots = this.fetchSlots(hostname)
     for (let i = 0; i < slots.length; i++) {
       const slot = slots[i];
-      if (slot.details.valid_state !== 'success') {
+      if (slot.details.valid_state !== 'success' && slot.details.valid_state !== 'warning') {
         result = true
         // document.getElementById('alarm-sound').play();
         // document.getElementById('alarm-sound').pause();
@@ -142,28 +152,63 @@ class App extends Component {
     return result
   }
 
+  fetchErrors(hostname) {
+    let result = []
+    const slots = this.fetchSlots(hostname)
+    for (let i = 0; i < slots.length; i++) {
+      const slot = slots[i];
+      if (slot.details.valid_state !== 'success' && slot.details.valid_state !== 'warning') {
+        result.push(slot)
+        break
+      }
+    }
+    return result
+  }
+
+  renderErrors(hostname) {
+    const result = []
+    const errors = this.fetchErrors(hostname)
+    for (let e = 0; e < errors.length; e++) {
+      const error = errors[e];
+      result.push(<span key={"error-" + e}> {error.details.name} {error.details.status}</span >)
+    }
+    return (
+      <div loop={true}>
+        {result}
+      </div>
+    )
+  }
+
   renderComputers() {
     const result = []
     const computers = this.computers || []
+
     for (let i = 0; i < this.state.slots.length; i++) {
       const slot = this.state.slots[i];
       if (computers.indexOf(slot.details.computername) === -1) {
         if (slot.details.hostname && slot.details.computername && slot.details.name) {
           const uniqueKey = slot.details.hostname + '_' + slot.details.computername + '_' + slot.details.name + i
           result.push(
-            <div key={uniqueKey} className="col-sm computer">
-              <a className="" data-toggle="collapse" href={'#' + uniqueKey + "_collapseExample"} role="button" aria-expanded="false" aria-controls="collapseExample">
-                <strong className={this.hasError(slot.hostname) ? 'text-danger' : 'text-success'}>
-                  <i className="fas fa-server"></i> {slot.details.computername}
-                </strong>
-              </a>
-              <div className="collapse" id={uniqueKey + "_collapseExample"}>
-                <ul>
-                  <li className="">
-                    {this.renderSlots(slot.details.computername)}
-                  </li>
-                </ul>
-              </div>
+            <div key={'host-' + i} className="container-fluid">
+              <Device server={{ hostname: slot.hostname }} >
+
+                <a className="" data-toggle="collapse" href={'#' + uniqueKey + "_collapseExample"} role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <strong className={this.hasError(slot.hostname) ? 'text-danger' : 'text-success'}>
+
+
+                    <i className="fas fa-server"></i> {slot.details.computername}
+
+                    {this.renderErrors(slot.hostname)}
+                  </strong>
+                </a>
+                <div className="collapse" id={uniqueKey + "_collapseExample"}>
+                  <div className="container-fluid">
+                    <div className="row">
+                      {this.renderSlots(slot.details.computername)}
+                    </div>
+                  </div>
+                </div>
+              </Device>
             </div>
           )
           computers.push(slot.details.computername)
@@ -181,11 +226,10 @@ class App extends Component {
       if (slot.details.computername === computername && slot.details.hostname && slot.details.computername && slot.details.name) {
         const uniqueKey = slot.details.hostname + '_' + slot.details.computername + '_' + slot.details.name + i
         result.push(
-          <div key={uniqueKey} className="col-sm">
-
-            <ul className="slot">
+          <div key={uniqueKey} className="slot">
+            <div className="col">
               <a href={"#" + uniqueKey} className={"text-" + (slot.details.valid_state || 'success')} data-toggle={"collapse"}>
-                <i class="fas fa-rocket"></i> {slot.details.name}
+                <i className={slot.details.icon || "fas fa-rocket"}></i> {slot.details.name} <small>{slot.version}</small>
               </a>
               <div id={uniqueKey} className="collapse">
                 <ul className="slot-details">
@@ -193,12 +237,11 @@ class App extends Component {
                 </ul>
               </div>
               <div className="">
-                <i className="fas fa-terminal"></i>
                 <small>
-                  {(slot.details.sender || '?')} v{slot.version}
+                  {slot.details.text}
                 </small>
               </div>
-            </ul>
+            </div>
           </div>
         )
       }
@@ -209,11 +252,8 @@ class App extends Component {
   render() {
     /* beautify preserve:start */
     return (<div className="App">
-      <div className="container">
-        <div className="row">
-          {this.renderComputers()}
-        </div>
-      </div>
+      {this.renderComputers()}
+
     </div>
     );
     /* beautify preserve:end */

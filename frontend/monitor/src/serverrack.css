@@ -1,0 +1,127 @@
+body,
+.App,
+#root {
+  height: 100%
+}
+
+@font-face {
+  font-family: 'LCDM2N';
+  src: url('./font/LCDM2N.eot');
+  src: local('LCDM2N'), url('./font/LCDM2N.woff') format('woff'), url('./font/LCDM2N.ttf') format('truetype');
+}
+
+/* Font downloaded from FontsForWeb.com */
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_523">Text with this font applied</p> */
+.fontsforweb_fontid_523 {
+  font-family: 'LCDBOLD' !important;
+}
+
+.inner-shadow {
+  -moz-box-shadow: inset 0 0 5px #000000;
+  -webkit-box-shadow: inset 0 0 5px #000000;
+  box-shadow: inset 0 0 5px #000000;
+}
+
+.outer-shadow {}
+
+.shaddow-5 {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.55), 0 15px 12px rgba(0, 0, 0, 0.22) !important;
+}
+
+.rack {
+  margin-top: 22px;
+  /* background-image: url('./burl-canaletto-walnut-dark-wood-texture-seamless.jpg'); */
+  border-width: 5px;
+  /* border-image: url('./burl-canaletto-walnut-dark-wood-texture-seamless.jpg') 1 round; */
+
+  border-style: solid;
+  border-radius: 3px;
+  border-color: #161212;
+  background-color: #161212;
+}
+
+.rack .handle {
+  /* background-image: url('./burl-canaletto-walnut-dark-wood-texture-seamless.jpg'); */
+  width: 45px;
+  border: 0;
+  border-style: solid;
+  /* border-image: url('./burl-canaletto-walnut-dark-wood-texture-seamless.jpg') 1 round; */
+  border-color: #161212;
+  border-radius: 3px;
+}
+
+.rack .handle.left {
+  border-right-width: 5px;
+}
+
+.rack .handle.right {
+  border-left-width: 5px;
+}
+
+.container-fluid {
+  padding: 0
+}
+
+.slot {
+  margin-top: 11px;
+  margin-right: 11px;
+}
+
+.rack .display {
+  margin-top: 14px;
+  padding: 22px;
+  background-color: #000;
+  font-family: 'LCDM2N' !important;
+
+
+  font-size: 1em;
+  letter-spacing: 2px;
+  color: rgb(201, 197, 255);
+}
+
+.led-red {
+  margin: 20px auto;
+  width: 12px;
+  height: 12px;
+  background-color: #940;
+  border-radius: 50%;
+  box-shadow: #000 0 -1px 7px 1px, inset #600 0 -1px 9px, #F00 0 2px 12px;
+}
+
+.led-yellow {
+  margin: 20px auto;
+  width: 12px;
+  height: 12px;
+  background-color: #A90;
+  border-radius: 50%;
+  box-shadow: #000 0 -1px 7px 1px, inset #660 0 -1px 9px, #DD0 0 2px 12px;
+}
+
+.led-green {
+  margin: 20px auto;
+  width: 12px;
+  height: 12px;
+  background-color: #690;
+  border-radius: 50%;
+  box-shadow: #000 0 -1px 7px 1px, inset #460 0 -1px 9px, #7D0 0 2px 12px;
+}
+
+.led-blue {
+  margin: 20px auto;
+  width: 12px;
+  height: 12px;
+  background-color: #4AB;
+  border-radius: 50%;
+  box-shadow: #000 0 -1px 7px 1px, inset #006 0 -1px 9px, #06F 0 2px 14px;
+}
+
+.rack ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rack ul li {
+  display: block;
+
+}
