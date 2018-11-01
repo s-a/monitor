@@ -10,7 +10,7 @@ class Device extends Component {
   render() {
     /* beautify preserve:start */
     return (
-      <div className="rack shaddow-5">
+      <div className="rack inner-shadow">
         {/* <div className="handle left inner-shadow">
             
           </div> */}
