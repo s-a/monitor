@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Device from './Device';
+import Slot from './Slot';
+import Meter from './Meter';
 
 
 function beep() {
@@ -17,9 +19,6 @@ function upd(a, b) {
   }
 };
 
-function capitalize(s) {
-  return s.replace(/_/g, ' ').toLowerCase().replace(/\b./g, function (a) { return a.toUpperCase(); });
-};
 
 
 class App extends Component {
@@ -95,41 +94,7 @@ class App extends Component {
     };
   }
 
-  renderSlotDetails(slot) {
-    const result = []
-    let lastKey = ''
-    const ignoreList = ['hostname', 'name', 'computername', 'sender', 'valid_state', 'icon', 'status', 'text']
-    for (const key in slot.details) {
-      const uniqueKey = slot.details.hostname + '-' + slot.details.computername + '-' + slot.details.name + '-' + key
-      if (ignoreList.indexOf(key) === -1 && slot.details.hasOwnProperty(key)) {
-        const data = slot.details[key] || 'null'
-        let keyControl = <strong>{capitalize(key)}: </strong>
-        let valueControl = JSON.stringify(data, '/t', 2)
-        if (typeof data === 'object') {
-          keyControl = null
-          valueControl = (
-            <div>
-              <a href={"#" + uniqueKey} className="" data-toggle={"collapse"}>{capitalize(key)}</a>
-              <code id={uniqueKey} className={"collapse"}>{data ? JSON.stringify(data, '/t', 2) : null}</code>
-            </div>
-          )
-        }
-        let slotItemDetail = (
-          <li className="" key={uniqueKey}>
-            {keyControl}{valueControl}
-          </li>
-        )
-        if (key > lastKey) {
-          result.unshift(slotItemDetail)
-        } else {
-          result.push(slotItemDetail)
-        }
 
-        lastKey = key
-      }
-    }
-    return result
-  }
 
   fetchSlots(hostname) {
     const result = []
@@ -230,38 +195,17 @@ class App extends Component {
       const slot = this.state.slots[i];
       if (slot.details.computername === computername && slot.details.hostname && slot.details.computername && slot.details.name) {
         const uniqueKey = slot.details.hostname + '_' + slot.details.computername + '_' + slot.details.name + i
-        result.push(
-          <div key={uniqueKey} className="slot">
-            <div className="col">
-              <a href={"#" + uniqueKey} className={"text-" + (slot.details.valid_state || 'success')} data-toggle={"collapse"}>
-                <i className={slot.details.icon || "fas fa-rocket"}></i> {slot.details.name} <small>{slot.version}</small>
-              </a>
-              <div id={uniqueKey} className="collapse">
-                <ul className="slot-details">
-                  {this.renderSlotDetails(slot)}
-                </ul>
-              </div>
-              <div className="">
-                <small>
-                  {slot.details.text}
-                </small>
-              </div>
-            </div>
-          </div>
-        )
+        result.push(<Slot slot={slot} id={uniqueKey} key={uniqueKey} />)
       }
     }
     return result
   }
 
   render() {
-    /* beautify preserve:start */
     return (<div className="App">
       {this.renderComputers()}
-
     </div>
     );
-    /* beautify preserve:end */
   }
 }
 

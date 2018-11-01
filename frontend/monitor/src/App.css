@@ -10,6 +10,10 @@ body {
   background-color: rgb(5, 5, 5)
 }
 
+pre {
+  color: #CE915B;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -284,4 +288,31 @@ a:hover {
   100% {
     opacity: 1;
   }
+}
+
+
+
+.meter {
+  height: 8px;
+  width: 40px;
+}
+
+.meter .step {
+  height: 8px;
+  width: 2px;
+  margin-left: 1px;
+  margin-right: 1px;
+  display: inline-block;
+}
+
+.meter .step.step-1 {
+  background-color: green;
+}
+
+.meter .step.step-2 {
+  background-color: yellow;
+}
+
+.meter .step.step-3 {
+  background-color: red;
 }
