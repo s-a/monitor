@@ -53,7 +53,7 @@ class Slot extends Component {
             <i className={this.props.slot.details.icon || "fas fa-rocket"}></i> {this.props.slot.details.name} <small>{this.props.slot.version}</small>
           </a>
           <div id={this.props.id} className="collapse">
-            <div className="container-fliud">
+            <div className="container-fluid">
               {this.renderSlotDetails(this.props.slot)}
             </div>
           </div>
