@@ -7,7 +7,7 @@ class SlotInfo extends Component {
     return (
       <div className="row">
         <div className="col-12">
-          <div className="line-1 anim-typewriter">
+          <div className="">
             {this.props.keyControl}: {this.props.valueControl}
           </div>
         </div>
