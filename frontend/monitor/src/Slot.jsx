@@ -43,7 +43,7 @@ class Slot extends Component {
       }
     }
 
-    result.unshift('', <small key={lastKey + '-'}>{'v' + slot.version}</small>)
+    result.unshift('', <small key={lastKey + '-'}>{'remote v' + slot.version} reported:</small>)
     return result
   }
 

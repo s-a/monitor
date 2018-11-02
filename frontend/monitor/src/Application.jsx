@@ -47,9 +47,9 @@ class App extends Component {
               body: slot.details.name.toUpperCase() + ' ' + slot.details.text,
             });
 
-            notification.onclick = function () {
+            /* notification.onclick = function () {
               window.open("http://stackoverflow.com/a/13328397/1269037");
-            };
+            }; */
 
           }
 
