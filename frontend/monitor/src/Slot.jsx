@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SlotInfo from './SlotInfo';
 import Meter from './Meter';
+import Expandable from './Expandable';
 
 
 
@@ -42,29 +43,33 @@ class Slot extends Component {
       }
     }
 
-    result.unshift('', <small>{'v' + slot.version}</small>)
+    result.unshift('', <small key={lastKey + '-'}>{'v' + slot.version}</small>)
     return result
   }
 
   render() {
     return (
-      <div className="">
-        <div className="slot">
-          <a href={"#" + this.props.id} className={"text-" + (this.props.slot.details.valid_state || 'success')} data-toggle={"collapse"}>
-            <i className={this.props.slot.details.icon || "fas fa-rocket"}></i> {this.props.slot.details.name}
-          </a>
-          <div id={this.props.id} className="collapse">
-            <div className="container-fluid">
-              {this.renderSlotDetails(this.props.slot)}
+      <div>
+        <Expandable class="slot"
+          header={(
+            <div className={'text-' + this.props.slot.details.valid_state}>
+              <i className={this.props.slot.details.icon || "fas fa-rocket"}></i>
+              <span>
+                {this.props.slot.details.name}
+              </span>
             </div>
-          </div>
-          <div className="text">
+          )}
+          footer={(
             <small>
               {this.props.slot.details.text}
             </small>
+          )}>
+          <div className="container-fluid">
+            {this.renderSlotDetails(this.props.slot)}
           </div>
-        </div>
-      </div>
+        </Expandable>
+
+      </div >
     );
   }
 }

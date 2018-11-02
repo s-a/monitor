@@ -345,14 +345,3 @@
      border-right-color: transparent;
    }
  }
-
- .expandable .slideup,
- .expandable .slidedown {
-   height: 0;
-   overflow: hidden;
- }
-
- .expandable .slidedown {
-   height: unset;
-   overflow: unset;
- }
