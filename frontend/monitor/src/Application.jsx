@@ -3,6 +3,7 @@ import './App.css';
 import Device from './Device';
 import Slot from './Slot';
 import Meter from './Meter';
+import DownSlider from './DownSlider';
 
 
 function beep() {
@@ -140,7 +141,7 @@ class App extends Component {
     const errors = this.fetchErrors(hostname)
     for (let e = 0; e < errors.length; e++) {
       const error = errors[e];
-      result.push(<span key={"error-" + e}> {error.details.name} {error.details.status}</span >)
+      result.push(<span key={"error-" + e}> {error.details.name} {error.details.text}</span >)
     }
     return (
       <div loop={true}>
@@ -156,18 +157,14 @@ class App extends Component {
     for (let i = 0; i < this.state.slots.length; i++) {
       const slot = this.state.slots[i];
       if (computers.indexOf(slot.details.computername) === -1) {
-        if (slot.details.hostname && slot.details.computername && slot.details.name) {
+        if (true/* slot.details.hostname && slot.details.computername && slot.details.name */) {
           const uniqueKey = slot.details.hostname + '_' + slot.details.computername + '_' + slot.details.name + i
           result.push(
             <div key={'host-' + i} className="container-fluid">
               <Device server={{ hostname: slot.hostname }} >
-
                 <a className="" data-toggle="collapse" href={'#' + uniqueKey + "_collapseExample"} role="button" aria-expanded="false" aria-controls="collapseExample">
                   <strong className={this.hasError(slot.hostname) ? 'text-danger' : 'text-success'}>
-
-
                     <i className="fas fa-server"></i> {slot.details.computername}
-
                     {this.renderErrors(slot.hostname)}
                   </strong>
                 </a>

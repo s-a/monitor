@@ -41,9 +41,18 @@ body,
 }
 
 .slot {
-  margin-top: 11px;
-  margin-right: 11px;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
   background-color: rgba(22, 22, 22, 0.308);
+  min-width: 80px;
+  padding: 8px;
+}
+
+.slot a,
+.slot .text {
+  white-space: nowrap;
+
 }
 
 .rack .display {

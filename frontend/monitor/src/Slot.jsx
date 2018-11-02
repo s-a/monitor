@@ -38,26 +38,27 @@ class Slot extends Component {
         } else {
           result.push(slotItemDetail)
         }
-
         lastKey = key
       }
     }
+
+    result.unshift('', <small>{'v' + slot.version}</small>)
     return result
   }
 
   render() {
     return (
-      <div className="slot">
-        <div className="col">
+      <div className="">
+        <div className="slot">
           <a href={"#" + this.props.id} className={"text-" + (this.props.slot.details.valid_state || 'success')} data-toggle={"collapse"}>
-            <i className={this.props.slot.details.icon || "fas fa-rocket"}></i> {this.props.slot.details.name} <small>{this.props.slot.version}</small>
+            <i className={this.props.slot.details.icon || "fas fa-rocket"}></i> {this.props.slot.details.name}
           </a>
           <div id={this.props.id} className="collapse">
             <div className="container-fluid">
               {this.renderSlotDetails(this.props.slot)}
             </div>
           </div>
-          <div className="">
+          <div className="text">
             <small>
               {this.props.slot.details.text}
             </small>
