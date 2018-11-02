@@ -53,10 +53,7 @@ class Slot extends Component {
         <Expandable class="slot"
           header={(
             <div className={'text-' + this.props.slot.details.valid_state}>
-              <i className={this.props.slot.details.icon || "fas fa-rocket"}></i>
-              <span>
-                {this.props.slot.details.name}
-              </span>
+              <i className={this.props.slot.details.icon || "fas fa-rocket"}></i> {this.props.slot.details.name}
             </div>
           )}
           footer={(
