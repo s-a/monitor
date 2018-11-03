@@ -11,6 +11,7 @@
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "info",
+        "INITIAL_DATA_SLOTS": "[{computername:DESKTOP-GNESREK, names:[mongo-db,elastic-search-server]},{computername:evil-computer,names:[test-error,gugu]}]",
         "DEFAULT_REFRESH_INTERVAL": "60",
         "EMAIL_CONFIG_transport_service": "gmail",
         "EMAIL_CONFIG_transport_auth_user": "cardioscan.test@gmail.com",
@@ -22,7 +23,12 @@
       "request": "launch",
       "name": "Slave",
       "program": "${workspaceFolder}/lib/socket-slave.js",
-      "outputCapture": "std"
+      "outputCapture": "std",
+      "env": {
+        "DEFAULT_REFRESH_INTERVAL": "60",
+        "MONGODB_URIS": "mongodb://localhost:27017/;mongodb://localhost:27017/",
+        "ELASTICSEARCH_URIS": "http://localhost:9200;http://localhost:9200"
+      }
     }
   ]
 }
