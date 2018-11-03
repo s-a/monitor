@@ -8,7 +8,14 @@
       "request": "launch",
       "name": "Master",
       "program": "${workspaceFolder}/lib/socket-master.js",
-      "outputCapture": "std"
+      "outputCapture": "std",
+      "env": {
+        "LOG_LEVEL": "info",
+        "DEFAULT_REFRESH_INTERVAL": "60",
+        "EMAIL_CONFIG_transport_service": "gmail",
+        "EMAIL_CONFIG_transport_auth_user": "cardioscan.test@gmail.com",
+        "EMAIL_CONFIG_transport_auth_pass": "cardioscan",
+      }
     },
     {
       "type": "node",

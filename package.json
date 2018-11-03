@@ -23,6 +23,7 @@
     "bunyan-format": "^0.2.1",
     "cheerio": "^1.0.0-rc.2",
     "diskusage": "^0.2.5",
+    "drivelist": "^6.4.3",
     "elasticsearch": "^15.1.1",
     "find-root": "^1.1.0",
     "handlebars": "^4.0.12",
