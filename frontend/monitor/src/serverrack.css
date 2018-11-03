@@ -78,3 +78,12 @@ body,
   display: block;
 
 }
+
+.rack small {
+  color: rgb(221, 221, 221);
+  padding-top: 2px;
+}
+
+.slot .collapse.show small {
+  color: rgb(150, 150, 150);
+}

@@ -15,7 +15,7 @@ class Slot extends Component {
   renderSlotDetails(slot) {
     const result = []
     let lastKey = ''
-    const ignoreList = ['hostname', 'name', 'computername', 'sender', 'valid_state', 'icon', 'status', 'text']
+    const ignoreList = ['CRON_EXPRESSION_TEXT', 'hostname', 'name', 'computername', 'sender', 'valid_state', 'icon', 'status', 'text']
     for (const key in slot.details) {
       const uniqueKey = slot.details.hostname + '-' + slot.details.computername + '-' + slot.details.name + '-' + key
       if (ignoreList.indexOf(key) === -1 && slot.details.hasOwnProperty(key)) {
@@ -43,7 +43,7 @@ class Slot extends Component {
       }
     }
 
-    result.unshift('', <small key={lastKey + '-'}>{'remote v' + slot.version} reported:</small>)
+    result.unshift('', <small className="slot-sender" key={lastKey + '-'}>{'remote v' + slot.version} reports {slot.details.CRON_EXPRESSION_TEXT}:</small>)
     return result
   }
 
