@@ -19,8 +19,7 @@
     "node",
     "promise",
     "standard",
-    "react",
-    "eslint-plugin-local"
+    "react"
   ],
   "extends": [
     "eslint:recommended",
@@ -38,10 +37,6 @@
     "no-warning-comments": ["warn"],
     "react/no-typos": 1,
     "linebreak-style": ["Error", "unix"],
-    "local/translate-has-text": "error",
-    "local/translate-exist": "warn",
-    "local/translate-valid": "error",
-    "local/feature-exists": "error",
     "accessor-pairs": "error",
     "arrow-spacing": ["error", {
       "before": true,

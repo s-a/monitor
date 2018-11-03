@@ -16,6 +16,8 @@
         "EMAIL_CONFIG_transport_service": "gmail",
         "EMAIL_CONFIG_transport_auth_user": "cardioscan.test@gmail.com",
         "EMAIL_CONFIG_transport_auth_pass": "cardioscan",
+        "EMAIL_OPTIONS_from": "no-reply@example.com",
+        "EMAIL_OPTIONS_to": "stephan.ahl@gmail.com"
       }
     },
     {
