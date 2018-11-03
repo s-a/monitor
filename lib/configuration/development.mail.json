@@ -1,0 +1,9 @@
+{
+  "transport": {
+    "service": "gmail",
+    "auth": {
+      "user": "cardioscan.test@gmail.com",
+      "pass": "cardioscan"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<body>
+  <h1 class="title">Monitoring alert</h1>
+  <p>Messages of interrest</p>
+  <ul class="">
+    {{#each context}}
+    <li>{{this.hostname}} {{this.version}} {{this.details.timestamp}} {{this.details.text}}</li>
+    {{/each}}
+  </ul>
+</body>

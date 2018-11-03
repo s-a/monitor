@@ -1,0 +1,7 @@
+# Ignore production and staging files
+*
+
+# But not these files...
+!development.*.js
+!development.*.json
+!.gitignore
