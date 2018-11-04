@@ -15,11 +15,11 @@ class Expandable extends Component {
   render() {
 
     return (
-      <div className={this.props.class}>
+      <div className={this.props.className}>
         <a data-toggle="collapse" href={'#' + this.guid} role="button" aria-expanded={this.state.show.toString()} aria-controls={this.guid}>
           {this.props.header}
         </a>
-        <div className={"collapse" + (this.state.show ? ' show' : '')} id={this.guid}>
+        <div className={"collapse" + (this.state.show ? ' show' : '') + ''} id={this.guid}>
           {this.props.children}
         </div>
         {this.props.footer}

@@ -49,8 +49,8 @@ class Slot extends Component {
 
   render() {
     return (
-      <div>
-        <Expandable class="slot"
+      <div className="col-3">
+        <Expandable className="slot"
           header={(
             <div className={'text-' + this.props.slot.details.valid_state}>
               <i className={this.props.slot.details.icon || "fas fa-rocket"}></i> {this.props.slot.details.name}

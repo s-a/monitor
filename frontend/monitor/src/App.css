@@ -17,7 +17,14 @@
    text-decoration: none;
  }
 
- .text-danger {}
+
+ .text-success {
+   color: rgb(46, 228, 88) !important;
+ }
+
+ .text-danger {
+   color: #ff2626 !important;
+ }
 
  .flicker-in-1 {
    -webkit-animation: flicker-in-1 2s linear infinite both;

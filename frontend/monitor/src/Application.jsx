@@ -76,6 +76,7 @@ class App extends Component {
     const slots = this.state.slots
     for (let s = 0; s < slots.length; s++) {
       slots[s].details.valid_state = 'secondary'
+      slots[s].details.text = 'Master web server not connected!'
     }
     this.setState({ slots })
   }
@@ -268,8 +269,8 @@ class App extends Component {
 
   render() {
     return (<div className="App">
-      <small>Server connection status: {this.state.websocketState.name} {this.state.websocketState.state === 0 ? `(${this.state.websocketConectionAttempts.toString()})` : ''} - {this.state.websocketState.description}</small>
       {this.renderComputers()}
+      <small>Server connection status: {this.state.websocketState.name} {this.state.websocketState.state === 0 ? `(${this.state.websocketConectionAttempts.toString()})` : ''} - {this.state.websocketState.description}</small>
     </div>
     );
   }
