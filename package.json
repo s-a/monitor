@@ -42,6 +42,7 @@
     "relaxed-json": "^1.0.1",
     "restify": "^7.2.1",
     "systeminformation": "^3.45.9",
+    "turndown": "^5.0.1",
     "websocket": "^1.0.28"
   },
   "devDependencies": {
