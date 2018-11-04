@@ -22,7 +22,12 @@ class App extends Component {
       log: {
         details: {}
       },
-      slots: []
+      slots: [],
+      websocketConectionAttempts: 1,
+      websocketState: {
+        name: 'UNKNOWN',
+        description: 'The status is currently unknown.',
+      }
     }
   }
 
@@ -67,23 +72,32 @@ class App extends Component {
     this.setState({ slots })
   }
 
-  componentDidMount() {
+  muteSlots() {
+    const slots = this.state.slots
+    for (let s = 0; s < slots.length; s++) {
+      slots[s].details.valid_state = 'secondary'
+    }
+    this.setState({ slots })
+  }
+
+  newWebsocketClient() {
     const self = this
     var W3CWebSocket = window.WebSocket;
     var protocoll = window.location.protocol === 'http:' ? 'ws' : 'wss'
     var port = window.location.protocol === 'http:' ? ':5040' : '/ws'
     var client = new W3CWebSocket(`${protocoll}://${window.location.hostname}${port}`, 'echo-protocol')
-
     client.onerror = function () {
-      console.log('Connection Error');
+      self.muteSlots()
+      self.refreshWebsocketConnectionState()
     };
 
     client.onopen = function () {
-      console.log('Master Server Connected');
+      self.refreshWebsocketConnectionState()
     };
 
     client.onclose = function () {
-      console.log('echo-protocol Client Closed');
+      self.muteSlots()
+      self.refreshWebsocketConnectionState()
     };
 
     client.onmessage = function (e) {
@@ -99,9 +113,59 @@ class App extends Component {
         }
       }
     };
+    return client
   }
 
+  componentDidMount() {
+    const self = this
 
+    this.websocketClient = this.newWebsocketClient()
+    window.setInterval(function () {
+      self.refreshWebsocketConnectionState()
+    }, 5000)
+
+  }
+
+  refreshWebsocketConnectionState() {
+    const self = this
+    let state = {
+      name: 'UNKNOWN',
+      description: 'The status is currently unknown.'
+    }
+    switch (self.websocketClient.readyState) {
+      case 0:
+        state = {
+          name: 'CONNECTING',
+          description: 'The connection is not yet open.'
+        }
+        break;
+      case 1:
+        state = {
+          name: 'OPEN',
+          description: 'The connection is open and ready to communicate.'
+        }
+        break;
+      case 2:
+        state = {
+          name: 'CLOSING',
+          description: 'The connection is in the process of closing.'
+        }
+        break;
+      case 3:
+        state = {
+          name: 'CLOSED',
+          description: 'The connection is closed.'
+        }
+        break;
+
+      default:
+        break;
+    }
+    self.setState({ websocketState: state, websocketConectionAttempts: self.state.websocketConectionAttempts + 1 })
+    if (self.websocketClient.readyState !== 1) {
+      self.websocketClient = self.newWebsocketClient()
+    }
+  }
 
   fetchSlots(hostname) {
     const result = []
@@ -204,6 +268,7 @@ class App extends Component {
 
   render() {
     return (<div className="App">
+      <small>Server connection status: {this.state.websocketState.name} {this.state.websocketState.state === 0 ? `(${this.state.websocketConectionAttempts.toString()})` : ''} - {this.state.websocketState.description}</small>
       {this.renderComputers()}
     </div>
     );

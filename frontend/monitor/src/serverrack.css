@@ -10,11 +10,6 @@ body,
   src: local('LCDM2N'), url('./font/LCDM2N.woff') format('woff'), url('./font/LCDM2N.ttf') format('truetype');
 }
 
-/* Font downloaded from FontsForWeb.com */
-/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_523">Text with this font applied</p> */
-.fontsforweb_fontid_523 {
-  font-family: 'LCDBOLD' !important;
-}
 
 .inner-shadow {
   -moz-box-shadow: inset 0 0 5px #000000;
