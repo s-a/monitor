@@ -1,3 +1,3 @@
 setInterval(() => {
-  // throw new Error("done")
+  throw new Error("done")
 }, 5000);

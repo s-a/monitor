@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Device from './Device';
 import Slot from './Slot';
-import Meter from './Meter';
 import Expandable from './Expandable';
 
 function upd(a, b) {
@@ -81,50 +80,67 @@ class App extends Component {
     this.setState({ slots })
   }
 
+  onWebSocketError(err) {
+    this.muteSlots()
+    this.refreshWebsocketConnectionState()
+  }
+
+  onWebSocketOpen() {
+    this.refreshWebsocketConnectionState()
+  }
+
+  onWebSocketClose() {
+    const self = this
+    this.muteSlots()
+    this.refreshWebsocketConnectionState()
+    window.setTimeout(function () {
+      self.websocketClient = self.newWebsocketClient()
+      self.refreshWebsocketConnectionState()
+    }, 5000)
+  }
+  onWebSocketMessage(e) {
+    if (typeof e.data === 'string') {
+      const log = JSON.parse(e.data)
+      if (log.hostname) {
+        const slots = this.state.slots
+        log.details.hostname = log.hostname
+        // log.details.computername = log.details.computername
+        this.upsertSlot(log)
+        // {this.state.log.hostname} {this.state.log.details.computername} {this.state.log.details.name}
+        this.setState({ slots })
+      }
+    }
+  }
+
   newWebsocketClient() {
     const self = this
+
+
+    if (self.websocketClient && self.websocketClient.readyState === 3) { // reconnect if stopped
+      self.websocketClient.removeEventListener('error', this.onWebSocketError)
+      self.websocketClient.removeEventListener('open', this.onWebSocketOpen)
+      self.websocketClient.removeEventListener('close', this.onWebSocketClose)
+      self.websocketClient.removeEventListener('message', this.onWebSocketMessage)
+      self.websocketClient.close()
+      self.websocketClient = null
+    }
+
     var W3CWebSocket = window.WebSocket;
     var protocoll = window.location.protocol === 'http:' ? 'ws' : 'wss'
     var port = window.location.protocol === 'http:' ? ':5040' : '/ws'
     var client = new W3CWebSocket(`${protocoll}://${window.location.hostname}${port}`, 'echo-protocol')
-    client.onerror = function () {
-      self.muteSlots()
-      self.refreshWebsocketConnectionState()
-    };
 
-    client.onopen = function () {
-      self.refreshWebsocketConnectionState()
-    };
+    client.addEventListener('error', this.onWebSocketError.bind(this))
+    client.addEventListener('open', this.onWebSocketOpen.bind(this))
+    client.addEventListener('close', this.onWebSocketClose.bind(this))
+    client.addEventListener('message', this.onWebSocketMessage.bind(this))
 
-    client.onclose = function () {
-      self.muteSlots()
-      self.refreshWebsocketConnectionState()
-    };
-
-    client.onmessage = function (e) {
-      if (typeof e.data === 'string') {
-        const log = JSON.parse(e.data)
-        if (log.hostname) {
-          const slots = self.state.slots
-          log.details.hostname = log.hostname
-          // log.details.computername = log.details.computername
-          self.upsertSlot(log)
-          // {this.state.log.hostname} {this.state.log.details.computername} {this.state.log.details.name}
-          self.setState({ slots })
-        }
-      }
-    };
     return client
   }
 
   componentDidMount() {
-    const self = this
-
     this.websocketClient = this.newWebsocketClient()
-    window.setInterval(function () {
-      self.refreshWebsocketConnectionState()
-    }, 5000)
-
+    this.refreshWebsocketConnectionState()
   }
 
   refreshWebsocketConnectionState() {
@@ -133,39 +149,40 @@ class App extends Component {
       name: 'UNKNOWN',
       description: 'The status is currently unknown.'
     }
-    switch (self.websocketClient.readyState) {
-      case 0:
-        state = {
-          name: 'CONNECTING',
-          description: 'The connection is not yet open.'
-        }
-        break;
-      case 1:
-        state = {
-          name: 'OPEN',
-          description: 'The connection is open and ready to communicate.'
-        }
-        break;
-      case 2:
-        state = {
-          name: 'CLOSING',
-          description: 'The connection is in the process of closing.'
-        }
-        break;
-      case 3:
-        state = {
-          name: 'CLOSED',
-          description: 'The connection is closed.'
-        }
-        break;
+    if (self.websocketClient) {
+      switch (self.websocketClient.readyState) {
+        case 0:
+          state = {
+            name: 'CONNECTING',
+            description: 'The connection is not yet open.'
+          }
+          break;
+        case 1:
+          state = {
+            name: 'OPEN',
+            description: 'The connection is open and ready to communicate.'
+          }
+          break;
+        case 2:
+          state = {
+            name: 'CLOSING',
+            description: 'The connection is in the process of closing.'
+          }
+          break;
+        case 3:
+          state = {
+            name: 'CLOSED',
+            description: 'The connection is closed.'
+          }
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
+
     }
-    self.setState({ websocketState: state, websocketConectionAttempts: self.state.websocketConectionAttempts + 1 })
-    if (self.websocketClient.readyState !== 1) {
-      self.websocketClient = self.newWebsocketClient()
-    }
+
+    self.setState({ websocketState: state })
   }
 
   fetchSlots(hostname) {
