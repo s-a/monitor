@@ -21,14 +21,14 @@ class Slot extends Component {
       if (ignoreList.indexOf(key) === -1 && slot.details.hasOwnProperty(key)) {
         const data = slot.details[key] || 'null'
 
-        let keyControl = capitalize(key)
-        let valueControl = JSON.stringify(data, '/t', 2)
+        let keyControl = <span className="slot-info-detail">{capitalize(key)}</span>
+        let valueControl = <span className="slot-info-detail">{data}</span>
         if (typeof data === 'object') {
           keyControl = (
-            <a href={"#" + uniqueKey} className="" data-toggle={"collapse"}>{capitalize(key)}</a>
+            <a className="slot-info-detail" href={"#" + uniqueKey} className="" data-toggle={"collapse"}>{capitalize(key)}</a>
           )
           valueControl = (
-            <pre><code id={uniqueKey} className={"collapse"}>{data ? JSON.stringify(data, '/t', 2) : null}</code></pre>
+            <pre className="slot-info-detail"><code id={uniqueKey} className={"collapse"}>{data ? JSON.stringify(data, '/t', 2) : null}</code></pre>
           )
         }
         let slotItemDetail = (
@@ -49,7 +49,7 @@ class Slot extends Component {
 
   render() {
     return (
-      <div className="col-3">
+      <div className="col-4">
         <Expandable className="slot"
           header={(
             <div className={'text-' + this.props.slot.details.valid_state}>

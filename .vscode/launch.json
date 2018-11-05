@@ -11,10 +11,10 @@
       "outputCapture": "std",
       "env": {
         "LOG_LEVEL": "info",
-        "INITIAL_DATA_SLOTS": "[{computername:DESKTOP-GNESREK, names:[mongo-db,elastic-search-server]},{computername:evil-computer,names:[test-error,gugu]}]",
+        "INITIAL_DATA_SLOTS": "[{computername:DESKTOP-GNESREK, names:[MAIL,SLACK,'MongoDB #1',CPU]},{computername:evil-computer,names:[test-error,gugu]}]",
         "DEFAULT_REFRESH_INTERVAL": "0 */55 * * * *",
         "SLACK_REFRESH_INTERVAL": "0 */59 * * * *",
-        "TRANSPORT_ADDONS": "./lib/transport/mail.js;./lib/transport/slack.js",
+        "TRANSPORT_ADDONS": "./transport/mail.js;./transport/slack.js",
         "SLACK_WEBHOOK_URL": "https://hooks.slack.com/services/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",
         "EMAIL_REFRESH_INTERVAL": "0 */59 * * * *",
         "EMAIL_CONFIG_transport_service": "gmail",
@@ -37,7 +37,7 @@
         /*  "ADDONS": "./addon/memory.js", */
         "MONGODB_URIS": "mongodb://localhost:27017/;mongodb://localhost:27017/",
         "ELASTICSEARCH_URIS": "http://localhost:9200;http://localhost:9200",
-        "ONLINE_URIS": "https://www.example.com;fasfasfsaf"
+        "ONLINE_URIS": "https://www.example.com"
       }
     }
   ]

@@ -5,11 +5,12 @@ class SlotInfo extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-12">
-          <div className="">
-            {this.props.keyControl}: {this.props.valueControl}
-          </div>
+      <div className="row ">
+        <div className="col">
+          {this.props.keyControl}:
+        </div>
+        <div className="col">
+          {this.props.valueControl}
         </div>
       </div>
     )

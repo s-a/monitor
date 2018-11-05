@@ -4,7 +4,7 @@
         "SLACK_REFRESH_INTERVAL": "0 */59 * * * *",
         "SLACK_WEBHOOK_URL": "https://hooks.slack.com/services/...",
          "TRANSPORT_ADDONS": "./transport/mail.js;./transport/slack.js",
-        "EMAIL_REFRESH_INTERVAL": "0 */20 * * * *",
+        "EMAIL_REFRESH_INTERVAL": "0 */20 * * * *", // 20 minutes ; 3 seconds "*/3 * * * * *",
         "EMAIL_CONFIG_transport_service": "gmail",
         "EMAIL_CONFIG_transport_auth_user": "cardioscan.test@gmail.com",
         "EMAIL_CONFIG_transport_auth_pass": "cardioscan",

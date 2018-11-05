@@ -44,6 +44,10 @@ body,
   padding: 8px;
 }
 
+.slot-info-detail {
+  background-color: rgb(12, 12, 12);
+}
+
 .slot a,
 .slot .text {
   white-space: nowrap;
