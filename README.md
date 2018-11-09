@@ -1,6 +1,14 @@
 # Monitor
 
+## Example preview
+
+![Preview](preview.jpg)
+
 To configure settings you need to set up environment variables for each process.
+
+## Start a master monitor
+
+`node lib/socket-master.js` 
 
 ## Available master settings
 
@@ -20,7 +28,11 @@ To configure settings you need to set up environment variables for each process.
 | `EMAIL_OPTIONS_to` | `uta@example.com`
 
 
-## Slave
+## Start a slave monitor
+
+`node lib/socket-slave.js` 
+
+## Available slave settings
 
 | Name   | Example |  
 |----------|-------------|
