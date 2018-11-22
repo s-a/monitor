@@ -16,13 +16,13 @@
         "DEFAULT_REFRESH_INTERVAL": "0 */55 * * * *",
         "INITIAL_DATA_SLOTS": "[{computername:DESKTOP-GNESREK, names:[EMAIL,SLACK,'MongoDB #1',CPU]},{computername:evil-computer,names:[test-error,gugu]}]",
         "SLACK_REFRESH_INTERVAL": "0 */23 * * * *",
-        "SLACK_WEBHOOK_URL": "https://hooks.slack.com/services/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",
+        "SLACK_WEBHOOK_URL": "https://hooks.slack.com/services/***/***/***",
         "EMAIL_REFRESH_INTERVAL": "0 */23 * * * *",
         "EMAIL_CONFIG_transport_service": "gmail",
-        "EMAIL_CONFIG_transport_auth_user": "cardioscan.test@gmail.com",
-        "EMAIL_CONFIG_transport_auth_pass": "cardioscan",
-        "EMAIL_OPTIONS_from": "cardioscan.test@gmail.com",
-        "EMAIL_OPTIONS_to": "stephan.ahlf@gmail.com"
+        "EMAIL_CONFIG_transport_auth_user": "gg@gmail.com",
+        "EMAIL_CONFIG_transport_auth_pass": "***",
+        "EMAIL_OPTIONS_from": "gg@gmail.com",
+        "EMAIL_OPTIONS_to": "stephan.ahlf@example.com"
       }
     },
     {
